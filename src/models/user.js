@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const uniqueValidator = require('mongoose-unique-validator');
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const userSchema = new mongoose.Schema({
 	name: {
@@ -46,8 +47,25 @@ userSchema.methods.toJSON = function() {
 
 	return userObject
 }
+
+userSchema.statics.login = async (email, password) => {
+	const user = await User.findOne({ email })
+	if (!user) {
+		throw new exception('User is not found')
+	}
+	const match = await bcrypt.compare(password, user.password)
+	if (!match) {
+		throw new exception('Wrong password')
+	}
+	return user
+}
+
+userSchema.methods.generateToken = async function () {
+	const user = this
+	const token = await jwt.sign({ _id: user._id.toString() }, "This is manar")
+	return token
+}
+
 const User = mongoose.model('User', userSchema)
-
-
 
 module.exports = User
