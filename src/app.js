@@ -1,9 +1,12 @@
-require('./db/mongoose')
+
+global.config = require('config');
+global.mongoose = require('./db/mongoose');
+
 const express = require('express')
 const user_router = require('./routers/user')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || config.get('port');
 
 app.use(express.json())
 app.use(user_router)

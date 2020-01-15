@@ -62,7 +62,7 @@ userSchema.statics.login = async (email, password) => {
 
 userSchema.methods.generateToken = async function () {
 	const user = this
-	const token = await jwt.sign({ _id: user._id.toString() }, "This is manar")
+	const token = await jwt.sign({ _id: user._id.toString() }, config.get('jwtSignature'))
 	return token
 }
 

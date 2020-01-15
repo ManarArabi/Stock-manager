@@ -5,7 +5,9 @@
   "main": "app.js",
   "author": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "export NODE_ENV=developement && node src/app.js",
+    "production": "export NODE_ENV=production && node src/app.js"
   },
   "license": "ISC",
   "dependencies": {
