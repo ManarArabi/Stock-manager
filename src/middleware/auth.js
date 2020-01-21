@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const auth = async (req, res, next) => {
 	try {
 		const token = req.header('Authorization').replace('Bearer ', '')
-		const decoded = await jwt.verify(token, "This is manar")
+		const decoded = await jwt.verify(token, config.get('jwtSignature'))
 		const user = await User.findById({ _id: decoded._id })
 		if (!user) {
 			throw new Error()
