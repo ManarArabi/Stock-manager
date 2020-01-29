@@ -19,21 +19,22 @@ router.post('/item', auth, async (req, res) => {
 	}
 })
 
-//not working
 router.delete('/item/:id', auth, async (req, res) => {
 	const _id = req.params.id
 	try {
 		const item = await Item.findOne({ _id })
-		console.log(typeof item.owner)
-		console.log(typeof req.user._id)
-		console.log(item.owner.equals(req.user._id))
-		if (item.owner.equals(req.user._id)) {
+		if (req.user._id.toString() != item.owner.toString()) {
 			res.status(403).send("You aren't the owner of this item, you can't delete it.")
 		}
-		item = await Item.findOneAndDelete({ _id })
-		res.status(200).send(item)
+		else {
+			await item.remove()
+			if (!item) {
+				res.status(404).send()
+			}
+			res.status(200).send(item)
+		}
 	} catch (e) {
-		res.status(400).send()
+		res.status(500).send()
 	}
 })
 
