@@ -1,5 +1,3 @@
-
-global.config = require('config');
 global.mongoose = require('./db/mongoose');
 
 const express = require('express')
@@ -7,7 +5,7 @@ const user_router = require('./routers/user')
 const item_router = require('./routers/item')
 
 const app = express()
-const port = process.env.PORT || config.get('port');
+const port = process.env.PORT;
 
 app.use(express.json())
 app.use(user_router)

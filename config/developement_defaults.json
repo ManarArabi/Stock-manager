@@ -1,5 +1,0 @@
-{
-    "mongoUrl": "mongodb://[username:password@]host[:port][/[database][?options]]",
-    "jwtSignature": "!@yourSignature",
-    "port": "3000"
-}
