@@ -10,7 +10,7 @@ router.post('/sign-up', async (req, res) => {
 		await user.save()
 		res.status(201).send(user)
 	} catch (e) {
-		res.status(400).send(e)
+		res.status(400).send()
 	}
 })
 
@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
 
 		res.send({ user, token })
 	} catch (e) {
-		res.status(400).send(e)
+		res.status(400).send()
 	}
 })
 
@@ -40,7 +40,7 @@ router.patch('/user', auth, async (req, res) => {
 		await req.user.save()
 		res.status(200).send(req.user)
 	} catch (e) {
-		res.status(400).send(e)
+		res.status(400).send()
 	}
 })
 
