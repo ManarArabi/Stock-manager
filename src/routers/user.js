@@ -44,6 +44,4 @@ router.patch('/user', auth, async (req, res) => {
 	}
 })
 
-
-
 module.exports = router
