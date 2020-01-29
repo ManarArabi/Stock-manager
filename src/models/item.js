@@ -13,7 +13,7 @@ const itemSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		default: null
 	},
-	user: {
+	owner: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true
 	}
