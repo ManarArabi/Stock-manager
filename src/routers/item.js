@@ -54,7 +54,7 @@ router.patch('/item/:id', auth, async (req, res) => {
 		let item = await Item.findOne({ _id })
 
 		if (req.user._id.toString() != item.owner.toString()) {
-			res.status(403).send("You aren't the owner of this item, you can't delete it.")
+			res.status(403).send("You aren't the owner of this item, you can't update it.")
 		}
 
 		updates.forEach((update) => {
@@ -67,4 +67,22 @@ router.patch('/item/:id', auth, async (req, res) => {
 	}
 })
 
+router.get('/item/:id', auth, async (req, res) => {
+	const _id = req.params.id
+	try {
+		const item = await Item.findOne({ _id })
+
+		if (req.user._id.toString() != item.owner.toString()) {
+			res.status(403).send("You aren't the owner of this item, you can't get it.")
+		}
+
+		if (!item) {
+			res.status(404).send()
+		}
+
+		res.status(200).send(item)
+	} catch (e) {
+		res.status(500).send()
+	}
+})
 module.exports = router
