@@ -17,7 +17,8 @@ const itemSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		required: true
 	}
-});
+}, { autoIndex: false });
+itemSchema.index({ category: 1, name: 1 }, { unique: true });
 
 const Item = mongoose.model('Item', itemSchema)
 
