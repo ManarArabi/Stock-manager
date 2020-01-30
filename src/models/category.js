@@ -7,10 +7,9 @@ const categorySchema = new mongoose.Schema({
 	},
 	parentCategory: {
 		type: mongoose.Schema.Types.ObjectId,
-		required: true,
 		default: null
 	},
-	user: {
+	owner: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true
 	}
